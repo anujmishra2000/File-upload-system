@@ -1,0 +1,17 @@
+<h2 class="text-center">Share File</h2>
+
+<p><strong>Title:</strong> <%= @file.title %></p>
+<p><strong>Description:</strong> <%= @file.description %></p>
+
+<p><strong>Public Link:</strong></p>
+<input type="text" value="<%= request.base_url + file_upload_short_url(@file.short_url) %>" id="copyLink" class="form-control">
+<button class="btn btn-primary mt-2" onclick="copyToClipboard()">Copy Link</button>
+
+<script>
+  function copyToClipboard() {
+    var copyText = document.getElementById("copyLink");
+    copyText.select();
+    document.execCommand("copy");
+    alert("Copied to clipboard!");
+  }
+</script>

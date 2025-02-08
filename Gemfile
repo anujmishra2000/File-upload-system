@@ -53,3 +53,5 @@ group :development, :test do
   gem 'image_processing'     # File compression
 
 end
+
+gem "importmap-rails", "~> 2.1"

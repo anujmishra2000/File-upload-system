@@ -1,0 +1,23 @@
+<h1>Upload a New File</h1>
+
+<%= form_with model: @file_upload, local: true do |form| %>
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :file %>
+    <%= form.file_field :file, class: "form-control" %>
+  </div>
+
+  <br>
+  <%= form.submit "Upload", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to 'Back', file_uploads_path, class: 'btn btn-secondary' %>
