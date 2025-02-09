@@ -1,5 +1,5 @@
 class FileUploadsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :short_url_redirect
 
   def index
     @files = current_user.file_uploads

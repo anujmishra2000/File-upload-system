@@ -18,8 +18,7 @@
         <td><%= file.description %></td>
         <td><%= file.file.content_type %></td>
         <td><%= link_to "Download", rails_blob_path(file.file, disposition: "attachment"), target: "_blank" %></td>
-        <td><%= link_to "View File", rails_blob_url(file.file), target: "_blank", class: "btn btn-info btn-sm" %></td>
-        <td>
+        <td><%= link_to "View File", rails_blob_url(file.file), target: "_blank", class: "btn btn-info btn-sm" %>
           <%= button_to 'Delete', file_upload_path(file), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
           <% if file.public_url.present? %>
             <div class="d-flex align-items-center">

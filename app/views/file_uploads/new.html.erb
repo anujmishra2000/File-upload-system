@@ -1,3 +1,13 @@
+<% if @file_upload && @file_upload.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>Errors:</h4>
+    <ul>
+      <% @file_upload.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <h1>Upload a New File</h1>
 
 <%= form_with model: @file_upload, local: true do |form| %>
