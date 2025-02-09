@@ -28,11 +28,25 @@ class FileUploadsController < ApplicationController
     redirect_to file_uploads_path
   end
 
-  def share
+  def generate_public_url
     @file = current_user.file_uploads.find(params[:id])
-    @file.update!(public_url: @file.short_url)
-    flash[:notice] = 'File shared successfully'
-    redirect_to file_uploads_path
+
+    if @file.public_url.blank?
+      @file.generate_public_url  # ✅ Generate the short URL
+      @file.reload
+    end
+
+    redirect_to file_uploads_path, notice: "Public URL generated successfully."
+  end
+
+  def short_url_redirect
+    @file = FileUpload.find_by(public_url: params[:public_url])
+
+    if @file.present?
+      redirect_to rails_blob_url(@file.file), allow_other_host: true
+    else
+      render plain: "Invalid or expired link", status: :not_found
+    end
   end
 
   private

@@ -4,11 +4,16 @@ class FileUpload < ApplicationRecord
 
   validates :file, presence: true
 
-  before_create :generate_short_url
+  def get_public_url
+    return unless public_url.present?
+    "http://localhost:3000/shared/#{public_url}"
+  end
 
-  private
-
-  def generate_short_url
-    self.short_url = Shortener::ShortenedUrl.generate("#{Rails.application.routes.url_helpers.rails_blob_url(file)}")
+  def generate_public_url
+    key = loop do
+      random_key = SecureRandom.alphanumeric(8)  # Generates a random 8-character key
+      break random_key unless FileUpload.exists?(public_url: random_key)
+    end
+    self.update(public_url: key)
   end
 end
